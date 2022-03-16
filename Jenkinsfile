@@ -1,20 +1,20 @@
 pipeline {
     agent any
     tools {
-        maven "MAVEN"
+        maven "mvn_3.8.5"
     }
     environment {
         NEXUS_VERSION = "nexus3"
         NEXUS_PROTOCOL = "http"
-        NEXUS_URL = "159.223.191.140:8081"
-        NEXUS_REPOSITORY = "java-app"
+        NEXUS_URL = "host.docker.internal:8081"
+        NEXUS_REPOSITORY = "maven-test-repository"
         NEXUS_CREDENTIAL_ID = "NEXUS_CRED"
     }
     stages {
         stage("Clone code from GitHub") {
             steps {
                 script {
-                    git branch: 'main', credentialsId: 'githubwithpassword', url: 'https://github.com/devopshint/jenkins-nexus';
+                    git branch: 'main', url: 'https://github.com/niv5/jenkins-nexus';
                 }
             }
         }
